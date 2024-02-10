@@ -1,46 +1,64 @@
-# vue-expense-tracker
+# Vue Expense Tracker
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a simple expense tracker built with Vue.js and the Composition API. It allows users to add and delete transactions, as well as view their transaction history.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Add new transactions (income or expense)
+- Delete existing transactions
+- View transaction history
+- Automatically saves transactions to local storage
 
-## Type Support for `.vue` Imports in TS
+## Technologies Used
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Vue.js
+- Composition API
+- HTML/CSS
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Getting Started
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+To get a local copy up and running, follow these steps:
 
-## Customize configuration
+1. Clone the repository:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+   ```bash
+   git clone https://github.com/BeratHundurel/vue-expense-tracker.git
+   ```
 
-## Project Setup
+2. Navigate into the project directory:
 
-```sh
-npm install
-```
+   ```bash
+   cd vue-expense-tracker
+   ```
 
-### Compile and Hot-Reload for Development
+3. Install dependencies:
 
-```sh
-npm run dev
-```
+   ```bash
+   npm install
+   ```
 
-### Type-Check, Compile and Minify for Production
+4. Run the development server:
 
-```sh
-npm run build
-```
+   ```bash
+   npm run serve
+   ```
 
-### Lint with [ESLint](https://eslint.org/)
+5. Open your browser and visit `http://localhost:8080` to view the app.
 
-```sh
-npm run lint
-```
+## Usage
+
+- Add a transaction: Enter the transaction name and amount, then click the "+" button.
+- Delete a transaction: Click the trash icon next to the transaction you want to delete.
+- View transaction history: Scroll down to see your transaction history.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions, improvements, or bug fixes, please open an issue or create a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Feel free to customize and expand upon this README to better suit your project and its features!

@@ -14,6 +14,7 @@ This is a simple expense tracker built with Vue.js and the Composition API. It a
 - Vue.js
 - Composition API
 - HTML/CSS
+- Typescript
 
 ## Getting Started
 

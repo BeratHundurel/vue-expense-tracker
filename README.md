@@ -43,22 +43,9 @@ To get a local copy up and running, follow these steps:
    npm run serve
    ```
 
-5. Open your browser and visit `http://localhost:8080` to view the app.
+5. Open your browser and visit `http://localhost:5174` to view the app.
 
 ## Usage
 
-- Add a transaction: Enter the transaction name and amount, then click the "+" button.
-- Delete a transaction: Click the trash icon next to the transaction you want to delete.
-- View transaction history: Scroll down to see your transaction history.
-
-## Contributing
-
-Contributions are welcome! If you have any suggestions, improvements, or bug fixes, please open an issue or create a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Feel free to customize and expand upon this README to better suit your project and its features!
+- Add a transaction: Enter the transaction name and amount, then click the "Add Transaction" button.
+- Delete a transaction: Click the X icon next to the transaction you want to delete.

@@ -7,6 +7,7 @@ import Balance from "./components/BalanceList.vue";
 import { computed, ref, onMounted } from "vue";
 import { type Transaction } from "./models/Transaction.vue";
 import { useToast } from "vue-toastification";
+import agent from "./app/api/agent.ts";
 const toast = useToast();
 const transactions = ref<Transaction[]>([]);
 
@@ -36,9 +37,13 @@ const expense = computed(() => {
 });
 
 const handleTransactionSubmitted = (transaction: Transaction) => {
-   transactions.value.push(transaction);
-   saveTransactionsToLocalStorage();
-   toast.success("Transaction added successfully");
+   agent.transactions.get().then((result) => {
+      console.log(result);
+      console.log(transaction)
+   });
+   //    transactions.value.push(transaction);
+   //    saveTransactionsToLocalStorage();
+   //    toast.success("Transaction added successfully");
 };
 const deleteTransaction = (id: number) => {
    const index = transactions.value.findIndex((transaction) => transaction.id === id);

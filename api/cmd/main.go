@@ -1,41 +1,30 @@
+// main.go
 package main
 
 import (
 	docs "expense-tracker/go/cmd/docs"
 	database "expense-tracker/go/database"
+	"expense-tracker/go/routes"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"net/http"
 )
 
-// @BasePath /api/v1
-
-// PingExample godoc
-// @Summary ping example
-// @Schemes
-// @Description do ping
-// @Tags example
-// @Accept json
-// @Produce json
-// @Success 200 {string} Helloworld
-// @Router /example/helloworld [get]
-func Helloworld(g *gin.Context) {
-	g.JSON(http.StatusOK, "helloworld")
-}
+const (
+	port = ":8080"
+)
 
 func main() {
-	r := gin.Default()
-	docs.SwaggerInfo.BasePath = "/api/v1"
-	v1 := r.Group("/api/v1")
-	{
-		eg := v1.Group("/example")
-		{
-			eg.GET("/helloworld", Helloworld)
-		}
-	}
+	// Initialize the database
 	database.InitDB()
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.Run(":8080")
-
+	// Set up Swagger documentation
+	docs.SwaggerInfo.BasePath = "/api"
+	// Set up Gin router
+	router := gin.Default()
+	// Set up routes
+	routes.SetRoutes(router)
+	// Serve Swagger documentation
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	// Run the server
+	router.Run(port)
 }

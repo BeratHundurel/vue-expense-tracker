@@ -15,7 +15,7 @@ const (
 )
 
 func main() {
-	// Initialize the database
+	// Initialize the database.
 	database.InitDB()
 	// Set up Swagger documentation
 	docs.SwaggerInfo.BasePath = "/api"

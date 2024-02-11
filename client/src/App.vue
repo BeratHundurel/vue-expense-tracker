@@ -13,7 +13,6 @@ const transactions = ref<Transaction[]>([]);
 
 onMounted(() => {
    const localTransactions = localStorage.getItem("transactions");
-   console.log("localTransactions", localTransactions);
    if (localTransactions === null) {
       console.log("fetching transactions");
       agent.transaction.get().then((result) => {
@@ -21,7 +20,6 @@ onMounted(() => {
          saveTransactionsToLocalStorage();
       });
    } else {
-      console.log("loading transactions from local storage");
       transactions.value = JSON.parse(localTransactions);
    }
 });

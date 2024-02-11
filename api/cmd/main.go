@@ -19,7 +19,7 @@ func main() {
 	database.InitDB()
 	// Set up Swagger documentation.
 	docs.SwaggerInfo.BasePath = "/api"
-	// Set up Gin router
+	// Set up Gin router.
 	router := gin.Default()
 	// Set up routes
 	routes.SetRoutes(router)

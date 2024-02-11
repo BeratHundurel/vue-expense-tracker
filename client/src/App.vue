@@ -13,22 +13,26 @@ const transactions = ref<Transaction[]>([]);
 onMounted(() => {
    const savedTransactions = JSON.parse(localStorage.getItem("transactions") || "[]");
    console.log(savedTransactions);
-   if (savedTransactions && savedTransactions.length > 0) {
-      console.log("inside if");
+   if (savedTransactions) {
       transactions.value = savedTransactions;
    }
-   console.log(transactions.value);
 });
 const total = computed(() => {
-   return transactions.value.reduce((acc, item) => (acc += item.amount), 0);
+   return transactions.value.length > 0 ? transactions.value.reduce((acc, item) => (acc += item.amount), 0) : 0;
 });
 
 const income = computed(() => {
-   return transactions.value.filter((transaction) => transaction.amount > 0).reduce((acc, item) => (acc += item.amount), 0);
+   return transactions.value
+      .filter((transaction) => transaction.amount > 0)
+      .reduce((acc, transaction) => acc + transaction.amount, 0)
+      .toFixed(2);
 });
 
 const expense = computed(() => {
-   return transactions.value.filter((transaction) => transaction.amount < 0).reduce((acc, item) => (acc += item.amount), 0);
+   return transactions.value
+      .filter((transaction) => transaction.amount < 0)
+      .reduce((acc, transaction) => acc + transaction.amount, 0)
+      .toFixed(2);
 });
 
 const handleTransactionSubmitted = (transaction: Transaction) => {
@@ -45,7 +49,7 @@ const deleteTransaction = (id: number) => {
 };
 
 const saveTransactionsToLocalStorage = () => {
-   localStorage.setItem("transactions", JSON.stringify(transactions));
+   localStorage.setItem("transactions", JSON.stringify(transactions.value));
 };
 </script>
 
@@ -53,7 +57,7 @@ const saveTransactionsToLocalStorage = () => {
    <Header />
    <div class="container">
       <Balance :total="total" />
-      <IncomeExpenses :income="income" :expense="expense" />
+      <IncomeExpenses :income="parseFloat(income)" :expense="parseFloat(expense)" />
       <TransactionList :transactions="transactions" @deleteTransaction="deleteTransaction" />
       <AddTransaction @addTransaction="handleTransactionSubmitted" />
    </div>

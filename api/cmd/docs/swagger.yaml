@@ -1,20 +1,72 @@
-basePath: /
+definitions:
+  models.Transaction:
+    properties:
+      amount:
+        type: number
+      id:
+        type: integer
+      text:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
-  /helloworld:
+  /addTransaction:
+    post:
+      consumes:
+      - application/json
+      description: Add a new transaction to the system
+      parameters:
+      - description: Transaction object to be added
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/models.Transaction'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Transaction'
+      summary: Add a new transaction
+      tags:
+      - transactions
+  /deleteTransaction/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a transaction from the system
+      parameters:
+      - description: Transaction Id to be deleted
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a transaction
+      tags:
+      - transactions
+  /transactions:
     get:
       consumes:
       - application/json
-      description: do ping
+      description: Retrieve a list of all transactions
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: string
-      summary: ping example
+            items:
+              $ref: '#/definitions/models.Transaction'
+            type: array
+      summary: Get all transactions
       tags:
-      - example
+      - transactions
 swagger: "2.0"

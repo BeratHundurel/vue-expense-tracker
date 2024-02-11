@@ -5,17 +5,24 @@ import TransactionList from "./components/TransactionList.vue";
 import AddTransaction from "./components/AddTransaction.vue";
 import Balance from "./components/BalanceList.vue";
 import { computed, ref, onMounted } from "vue";
-import { type Transaction } from "./models/Transaction.vue";
+import { type Transaction } from "./models/transaction.ts";
 import { useToast } from "vue-toastification";
-import agent from "./app/api/agent.ts";
+import agent from "./api/agent";
 const toast = useToast();
 const transactions = ref<Transaction[]>([]);
 
 onMounted(() => {
-   const savedTransactions = JSON.parse(localStorage.getItem("transactions") || "[]");
-   console.log(savedTransactions);
-   if (savedTransactions) {
-      transactions.value = savedTransactions;
+   const localTransactions = localStorage.getItem("transactions");
+   console.log("localTransactions", localTransactions);
+   if (localTransactions === null) {
+      console.log("fetching transactions");
+      agent.transaction.get().then((result) => {
+         transactions.value = result;
+         saveTransactionsToLocalStorage();
+      });
+   } else {
+      console.log("loading transactions from local storage");
+      transactions.value = JSON.parse(localTransactions);
    }
 });
 const total = computed(() => {
@@ -37,20 +44,15 @@ const expense = computed(() => {
 });
 
 const handleTransactionSubmitted = (transaction: Transaction) => {
-   agent.transactions.get().then((result) => {
-      console.log(result);
-      console.log(transaction)
-   });
-   //    transactions.value.push(transaction);
-   //    saveTransactionsToLocalStorage();
-   //    toast.success("Transaction added successfully");
-};
-const deleteTransaction = (id: number) => {
-   const index = transactions.value.findIndex((transaction) => transaction.id === id);
-   if (index === -1) toast.error("Transaction not found");
-   transactions.value.splice(index, 1);
+   agent.transaction.addTransaction(transaction);
+   transactions.value.push(transaction);
    saveTransactionsToLocalStorage();
-   toast.success("Transaction deleted successfully");
+};
+
+const deleteTransaction = (id: number) => {
+   agent.transaction.deleteTransaction(id);
+   transactions.value = transactions.value.filter((transaction) => transaction.id !== id);
+   saveTransactionsToLocalStorage();
 };
 
 const saveTransactionsToLocalStorage = () => {

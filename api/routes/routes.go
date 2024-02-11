@@ -7,5 +7,7 @@ import (
 )
 
 func SetRoutes(router *gin.Engine) {
-	router.GET("/api/helloworld", handlers.Helloworld)
+	router.GET("/api/transactions", handlers.GetAllTransactions)
+	router.POST("/api/addTransaction", handlers.AddTransaction)
+	router.DELETE("/api/deleteTransaction/:id", handlers.DeleteTransaction)
 }

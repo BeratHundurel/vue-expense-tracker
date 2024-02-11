@@ -1,7 +1,7 @@
-package main
+package models
 
 type Transaction struct {
-   Id     int
-   Text   string
-   Amount float64
+	Id     int     `db:"Id" json:"id"`
+	Text   string  `db:"Text" json:"text"`
+	Amount float64 `db:"Amount" json:"amount"`
 }

@@ -29,7 +29,7 @@ const onSubmit = () => {
       return;
    }
    emit("addTransaction", {
-      id: Math.floor(Math.random() * 100000000),
+      id: null,
       text: text.value,
       amount: parseFloat(amount.value),
    });

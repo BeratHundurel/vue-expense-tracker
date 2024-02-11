@@ -2,6 +2,7 @@ package main
 
 import (
 	docs "expense-tracker/go/cmd/docs"
+	database "expense-tracker/go/internal/database"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -33,6 +34,7 @@ func main() {
 			eg.GET("/helloworld", Helloworld)
 		}
 	}
+	database.InitDB()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run(":8080")
 

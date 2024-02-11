@@ -2,8 +2,6 @@ module expense-tracker/go
 
 go 1.21.5
 
-require github.com/microsoft/go-mssqldb v1.6.0
-
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.2.1 // indirect

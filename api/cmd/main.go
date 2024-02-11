@@ -2,7 +2,7 @@ package main
 
 import (
 	docs "expense-tracker/go/cmd/docs"
-	database "expense-tracker/go/internal/database"
+	database "expense-tracker/go/database"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

@@ -6,9 +6,11 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
+var db *sql.DB
+
 func InitDB() {
 	// Define the connection string
-	connString := "Server=192.168.1.103,1433;Database=ReStore;integrated security=True;multipleactiveresultsets=True;TrustServerCertificate=True;"
+	connString := "Server=192.168.1.103,1433;Database=ExpenseTracker;integrated security=True;multipleactiveresultsets=True;TrustServerCertificate=True;"
 
 	// Open a connection to the SQL Server
 	db, err := sql.Open("sqlserver", connString)
@@ -24,6 +26,5 @@ func InitDB() {
 		fmt.Println("Error testing SQL Server connection:", err.Error())
 		return
 	}
-
 	fmt.Println("Connected to SQL Server!")
 }
